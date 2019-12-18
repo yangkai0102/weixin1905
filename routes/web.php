@@ -19,7 +19,11 @@ Route::get('/info',function () {
     phpinfo();
 });
 
+//微信开发
 Route::get('/wx','WeiXin\WxController@wx');
 Route::post('/wx','WeiXin\WxController@receiv');
 Route::get('/wx/media','WeiXin\WxController@getMedia');
 Route::get('/wx/menu','WeiXin\WxController@createMenu');
+
+//微信公众号
+Route::get('/vote','VoteController@index');     //微信投票

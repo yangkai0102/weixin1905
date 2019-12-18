@@ -173,8 +173,8 @@ class WxController extends Controller
                             <MsgType><![CDATA[voice]]></MsgType>
                             <Voice>
                                 <MediaId><![CDATA['.$media_id.']]></MediaId>
-                              </Voice>
-                              </xml>';
+                            </Voice>
+                            </xml>';
             echo $response_voice;
         }elseif ($msg_type=="video"){
             $this->getMedia2($media_id,$msg_type);
@@ -245,6 +245,10 @@ class WxController extends Controller
 
     //自定义菜单
     public function createMenu(){
+
+        $url='https://1905yangkai.comcto.com/vote';
+        $redirect_uri=urlencode($url);         //授权后跳转页面
+        //获取自定义菜单的接口
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->access_token;
         $menu=[
             'button'=>[
@@ -252,6 +256,11 @@ class WxController extends Controller
                     "type"=>"click",
                     "name"=>"获取天气",
                     "key"=>"weather"
+                ],
+                [
+                    "type"=>"view",
+                    "name"=>"投票",
+                    "url" =>'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=yk0102#wechat_redirect'
                 ],
 
             ]
