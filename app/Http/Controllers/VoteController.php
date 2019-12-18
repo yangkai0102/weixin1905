@@ -30,7 +30,7 @@ class VoteController extends Controller
         $total=Redis::zCard($key);   //获取总数
         echo '投票总人数：'.$total;echo '</br>';
         $menmber=Redis::zRange($key,0,-1,true);
-        echo '<pre>';print_r($menmber);echo '</pre>';
+//        echo '<pre>';print_r($menmber);echo '</pre>';
         foreach($menmber as $k=>$v){
             echo "用户：".$k .' 投票时间：'. date('Y-m-d H:i:s',$v);echo '</br>';
         }
