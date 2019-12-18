@@ -8,7 +8,7 @@ class VoteController extends Controller
 {
     //
     public function index(){
-        print_r($_GET);
+
         $code=$_GET['code'];
         //获取access_token
         $data=$this->getAccessToken($code);
@@ -17,6 +17,7 @@ class VoteController extends Controller
         $user_info=$this->getUserInfo($data['access_token'],$data['openid']);
 
         //处理业务逻辑
+        $openid=$user_info['openid'];
         $redis_key='vote';
         $number=Redis::incr($redis_key);
         echo "投票成功，当前投票数：".$number;

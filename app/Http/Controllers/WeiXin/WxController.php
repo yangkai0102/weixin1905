@@ -246,8 +246,9 @@ class WxController extends Controller
     //自定义菜单
     public function createMenu(){
 
-        $url='https://1905yangkai.comcto.com/vote';
+        $url='http://1905yangkai.comcto.com/vote';
         $redirect_uri=urlencode($url);         //授权后跳转页面
+//        print_r($redirect_uri);
         //获取自定义菜单的接口
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->access_token;
         $menu=[
@@ -270,8 +271,8 @@ class WxController extends Controller
         $response=$client->request('POST',$url,[
             'body'=>$menu_json
         ]);
-
-        echo $response->getBody();
+        print_r($menu);
+        echo $response->getBody();    //接收  微信接口的响应数据
     }
 
 }
