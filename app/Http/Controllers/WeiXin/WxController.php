@@ -113,23 +113,25 @@ class WxController extends Controller
 
 
             //请求第三方接口 获取天气
-            $weather_api='https://free-api.heweather.net/s6/weather/now?locationbeijing&key=84b0762b44004553957edc38e40862c9';
+            $weather_api='https://free-api.heweather.net/s6/weather/now?location=beijing&key=84b0762b44004553957edc38e40862c9';
             $weather_info=file_get_contents($weather_api);
+
             $weather_info_arr=json_decode($weather_info,true);
+//            print_r($weather_info_arr);die;
             $cond_txt=$weather_info_arr['HeWeather6'][0]['now']['cond_txt'];
             $tmp=$weather_info_arr['HeWeather6'][0]['now']['tmp'];
             $wind_dir=$weather_info_arr['HeWeather6'][0]['now']['wind_dir'];
             $msg=$cond_txt.' 温度：'.$tmp . '风向：'. $wind_dir;
 
             if($xml_obj->EventKey=='weather'){
-                $response='<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
+                $response_weather='<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
 <FromUserName><![CDATA['.$xml_obj->ToUserName.']]></FromUserName>
 <CreateTime>'.time().'</CreateTime>
 <MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA['. date('Y-m-d H:i:s') . $msg.']]></Content>
 </xml>';
             }
-            echo $response;
+            echo $response_weather;
         }
         $msg_type=$xml_obj->MsgType;
         $touser = $xml_obj->FromUserName;     //接收消息的用户openid
