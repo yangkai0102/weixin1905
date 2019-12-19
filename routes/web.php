@@ -11,14 +11,9 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::get('/info',function () {
     phpinfo();
 });
-
 
 Route::get('/','Index\IndexController@index');
 
