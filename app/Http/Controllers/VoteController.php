@@ -17,7 +17,7 @@ class VoteController extends Controller
         $user_info=$this->getUserInfo($data['access_token'],$data['openid']);
 
         //保存用户信息
-        $userinfo_key='h:u'.$data['openid'];
+        $userinfo_key='h:u:'.$data['openid'];
         Redis::hMet($userinfo_key,$user_info);
 
         //处理业务逻辑
@@ -36,7 +36,7 @@ class VoteController extends Controller
         $member=Redis::zRange($key,0,-1,true);
 //        echo '<pre>';print_r($member);echo '</pre>';
         foreach($member as $k=>$v){
-            $u_k='h:u'.$k;
+            $u_k='h:u:'.$k;
             $u=Redis::hgetall($u_k);
             echo ' <img src="'.$u['headimgurl'].'"> ';
             echo "用户：".$k .' 投票时间：'. date('Y-m-d H:i:s',$v);echo '</br>';
