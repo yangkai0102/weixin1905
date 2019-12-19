@@ -19,6 +19,7 @@ Route::get('/info',function () {
     phpinfo();
 });
 
+
 Route::get('/','Index\IndexController@index');
 
 
