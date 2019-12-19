@@ -18,7 +18,7 @@ class VoteController extends Controller
 
         //保存用户信息
         $userinfo_key='h:u:'.$data['openid'];
-        Redis::hMet($userinfo_key,$user_info);
+        Redis::hMset($userinfo_key,$user_info);
 
         //处理业务逻辑
         $openid=$user_info['openid'];
