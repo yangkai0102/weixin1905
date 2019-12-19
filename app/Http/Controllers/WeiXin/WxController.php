@@ -248,6 +248,11 @@ class WxController extends Controller
 
         $url='http://1905yangkai.comcto.com/vote';
         $redirect_uri=urlencode($url);         //授权后跳转页面
+
+        //微信商城
+        $shop_url='http://1905yangkai.comcto.com/';
+        $redirect_shop=urlencode($shop_url);
+
 //        print_r($redirect_uri);
         //获取自定义菜单的接口
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->access_token;
@@ -263,7 +268,11 @@ class WxController extends Controller
                     "name"=>"投票",
                     "url" =>'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx112dc5198a6a8695&redirect_uri='.$redirect_uri.'&response_type=code&scope=snsapi_userinfo&state=yk0102#wechat_redirect'
                 ],
-
+                [
+                    "type"=>"view",
+                    "name"=>"微信商城",
+                    "url" =>'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx112dc5198a6a8695&redirect_uri='.$redirect_shop.'&response_type=code&scope=snsapi_userinfo&state=yk0102#wechat_redirect'
+                ],
             ]
         ];
         $menu_json=json_encode($menu,JSON_UNESCAPED_UNICODE);
