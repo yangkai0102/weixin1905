@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\WeiXin;
 
 use App\Http\Controllers\Controller;
+use App\WeiXin\Message;
 use App\WeiXin\P_wx_users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -147,6 +148,15 @@ class WxController extends Controller
                 <MsgType><![CDATA[text]]></MsgType>
                 <Content><![CDATA['.$content.']]></Content>
                </xml>';
+
+            $data=[
+                'openid'=>$openid,
+                'nickname'=>$user['nickname'],
+                'sex'=>$user['sex'],
+                'content'=>$content
+            ];
+            $res=Message::create($data);
+
             echo $response_text;
         }elseif ($msg_type=="image"){     //图片消息
             //下载图片
