@@ -294,4 +294,11 @@ class WxController extends Controller
         echo $response->getBody();    //接收  微信接口的响应数据
     }
 
+    //access_token
+    function access_token(){
+        $key = 'wx_access_token';
+        Redis::del($key);
+        echo $this->getAccessToken();
+    }
+
 }
