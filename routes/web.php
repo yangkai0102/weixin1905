@@ -19,7 +19,8 @@ Route::get('/info',function () {
     phpinfo();
 });
 
-Route::get('/','Index\IndexController@index');
+Route::get('/','Index\IndexController@index');            //微商城首页
+Route::get('/goods/detail','Goods\IndexController@detail');      //商品详情页
 
 
 //微信开发
