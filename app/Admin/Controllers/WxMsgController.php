@@ -19,7 +19,7 @@ class WxMsgController extends AdminController
         $key='wx_access_token';
         $access_token=Redis::get($key);
 //        echo $access_token;
-        $openid_arr=P_wx_users::select('openid')->get();
+        $openid_arr=P_wx_users::select('openid')->get()->toArray();
 //        print_r($openid_arr);die;
         $openid=array_column($openid_arr,'openid');
         $url='https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token='.$access_token;

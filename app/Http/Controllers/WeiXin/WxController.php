@@ -91,15 +91,15 @@ class WxController extends Controller
 //                dump($user);
                 file_put_contents('wx_user.log',$user_info,FILE_APPEND);
 
-                $data=[
-                    'openid'=>$openid,
-                    'subscribe_time'=>$user['subscribe_time'],
-                    'nickname'=>$user['nickname'],
-                    'sex'=>$user['sex'],
-                    'headimgurl'=>$user['headimgurl']
-
-                ];
-                $res=P_wx_users::create($data);
+//                $data=[
+//                    'openid'=>$openid,
+//                    'subscribe_time'=>$user['subscribe_time'],
+//                    'nickname'=>$user['nickname'],
+//                    'sex'=>$user['sex'],
+//                    'headimgurl'=>$user['headimgurl']
+//
+//                ];
+//                $res=P_wx_users::create($data);
                 $msg='谢谢关注';
                 $xml='<xml>
   <ToUserName><![CDATA['.$openid.']]></ToUserName>
@@ -139,8 +139,16 @@ class WxController extends Controller
         $fromuser=$xml_obj->ToUserName;
         $time=time();
         $media_id=$xml_obj->MediaId;
+        $content=date('Y-m-d h:i:s').$xml_obj->Content;
+
+        $data=[
+            'openid'=>$openid,
+            'nickname'=>$user['nickname'],
+            'sex'=>$user['sex'],
+            'content'=>$content
+        ];
+        $res=Message::create($data);
         if($msg_type=="text"){
-            $content=date('Y-m-d h:i:s').$xml_obj->Content;
             $response_text='<xml>
                 <ToUserName><![CDATA['.$touser.']]></ToUserName>
                 <FromUserName><![CDATA['.$fromuser.']]></FromUserName>
@@ -149,13 +157,7 @@ class WxController extends Controller
                 <Content><![CDATA['.$content.']]></Content>
                </xml>';
 
-            $data=[
-                'openid'=>$openid,
-                'nickname'=>$user['nickname'],
-                'sex'=>$user['sex'],
-                'content'=>$content
-            ];
-            $res=Message::create($data);
+
 
             echo $response_text;
         }elseif ($msg_type=="image"){     //图片消息
