@@ -88,7 +88,7 @@ class WxController extends Controller
         //处理xml数据
         $xml_obj=simplexml_load_string($xml_str);
         $event=$xml_obj->Event;
-        dd($event);
+//        dd($event);
         $openid=$xml_obj->FromUserName;//获取用户的openid
 
         if($event=='subscribe'){
@@ -109,18 +109,17 @@ class WxController extends Controller
                 $url='https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->access_token.'&openid='.$openid;
                 $user_info=file_get_contents($url);
                 $user=json_decode($user_info,true);//转换为数组
-//                dump($user);
                 file_put_contents('wx_user.log',$user_info,FILE_APPEND);
 
-//                $data=[
-//                    'openid'=>$openid,
-//                    'subscribe_time'=>$user['subscribe_time'],
-//                    'nickname'=>$user['nickname'],
-//                    'sex'=>$user['sex'],
-//                    'headimgurl'=>$user['headimgurl']
-//
-//                ];
-//                $res=P_wx_users::create($data);
+                $data=[
+                    'openid'=>$openid,
+                    'subscribe_time'=>$user['subscribe_time'],
+                    'nickname'=>$user['nickname'],
+                    'sex'=>$user['sex'],
+                    'headimgurl'=>$user['headimgurl']
+
+                ];
+                $res=P_wx_users::create($data);
                 $msg='谢谢关注';
                 $xml='<xml>
   <ToUserName><![CDATA['.$openid.']]></ToUserName>
@@ -132,7 +131,6 @@ class WxController extends Controller
                 echo $xml;
             }
         }elseif ($event=='CLICK'){
-
             //请求第三方接口 获取天气
             $weather_api='https://free-api.heweather.net/s6/weather/now?location=beijing&key=84b0762b44004553957edc38e40862c9';
             $weather_info=file_get_contents($weather_api);
@@ -146,11 +144,11 @@ class WxController extends Controller
 
             if($xml_obj->EventKey=='weather'){
                 $response_weather='<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
-<FromUserName><![CDATA['.$xml_obj->ToUserName.']]></FromUserName>
-<CreateTime>'.time().'</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA['. date('Y-m-d H:i:s') . $msg.']]></Content>
-</xml>';
+                                        <FromUserName><![CDATA['.$xml_obj->ToUserName.']]></FromUserName>
+                                        <CreateTime>'.time().'</CreateTime>
+                                        <MsgType><![CDATA[text]]></MsgType>
+                                        <Content><![CDATA['. date('Y-m-d H:i:s') . $msg.']]></Content>
+                                   </xml>';
                 echo $response_weather;
             }
         }
