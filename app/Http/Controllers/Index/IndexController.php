@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Index;
 use App\Http\Controllers\Controller;
 use App\WeiXin\P_wx_users;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class IndexController extends Controller
 {
     //
@@ -15,6 +15,7 @@ class IndexController extends Controller
 
         //判断用户是否已存在
         $openid=$data['openid'];
+
         $u=P_wx_users::where(['openid'=>$openid])->first();
         if($u){
             $user_info=$u->toArray();
