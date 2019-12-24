@@ -633,8 +633,8 @@
         wx.updateAppMessageShareData({
             title: '微信商城', // 分享标题
             desc: '首页', // 分享描述
-            link: 'http://yangkai1905.comcto.com/img/profile.jpg', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: 'http://yangkai1905.comcto.com/img/profile.jpg', // 分享图标
+            link: 'http://1905yangkai.comcto.com/img/1001878.jpg', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: 'http://1905yangkai.comcto.com/img/1001878.jpg', // 分享图标
             success: function () {
                 // 设置成功
                 alert('分享朋友成功');
@@ -644,8 +644,8 @@
         wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
             wx.updateTimelineShareData({
                 title: '微商城', // 分享标题
-                link: 'http://yangkai1905.comcto.com/img/profile.jpg', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: 'http://yangkai1905.comcto.com/img/profile.jpg', // 分享图标
+                link: 'http://1905yangkai.comcto.com/img/1001878.jpg', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: 'http://1905yangkai.comcto.com/img/1001878.jpg', // 分享图标
                 success: function () {
                     alert("分享成功");
                 }

@@ -21,6 +21,7 @@ class WxController extends Controller
         echo $this->access_token;
     }
 
+    //微信网页授权登录
     public function login(){
         $code=$_GET['code'];
         $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_APPSECRET').'&code='.$code.'&grant_type=authorization_code';
@@ -154,7 +155,7 @@ class WxController extends Controller
         }
         $msg_type=$xml_obj->MsgType;
         $touser = $xml_obj->FromUserName;     //接收消息的用户openid
-        $fromuser=$xml_obj->ToUserName;
+        $fromuser=$xml_obj->ToUserName;       //开发者公众号的ID
         $time=time();
         $media_id=$xml_obj->MediaId;
         $content=date('Y-m-d h:i:s').$xml_obj->Content;

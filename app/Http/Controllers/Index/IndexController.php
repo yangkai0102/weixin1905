@@ -19,6 +19,7 @@ class IndexController extends Controller
             'nonceStr'  => $nonceStr,
         ];
         $ticket = P_wx_users::getJsapiTicket();  //获取jsapi_ticket
+
         $url = $_SERVER['APP_URL'] . $_SERVER['REQUEST_URI'];     //  当前url
         $jsapi_signature = P_wx_users::jsapiSign($ticket,$url,$wx_config);
         $wx_config['signature'] = $jsapi_signature;
