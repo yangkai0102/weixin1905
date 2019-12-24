@@ -17,16 +17,16 @@ class P_wx_users extends Model
 
     public static function getAccessToken()
     {
-        $key = 'wx_access_token';
-        $access_token = Redis::get($key);
-        if ($access_token) {
+        $key='wx_access_token';
+        $access_token=Redis::get($key);
+        if($access_token){
             return $access_token;
         }
-        $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . env('WX_APPID') . '&secret=' . env('WX_APPSECRET');
-        $data_json = file_get_contents($url);
-        $arr = json_decode($data_json, true);
-        Redis::set($key, $arr['access_token']);
-        Redis::expire($key, 3600);
+        $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WX_APPID').'&secret='.env('WX_APPSECRET');
+        $data_json=file_get_contents($url);
+        $arr=json_decode($data_json,true);
+        Redis::set($key,$arr['access_token']);
+        Redis::expire($key,3600);
         return $arr['access_token'];
     }
 
@@ -38,8 +38,9 @@ class P_wx_users extends Model
         }
         $access_token=self::getAccessToken();
         $url='https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi';
-        $jsapi=file_get_contents($url);
-        $data=json_decode($jsapi,true);
+        $j=file_get_contents($url);
+        $data=json_decode($j,true);
+
         Redis::set($key,$data['ticket']);
         Redis::expire($key,3600);
         return $data['ticket'];
