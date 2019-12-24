@@ -14,7 +14,7 @@ class IndexController extends Controller
         //微信配置
         $nonceStr = Str::random(8);
         $wx_config = [
-            'appid'     => env('WX_APPID'),
+            'appId'     => env('WX_APPID'),
             'timestamp' => time(),
             'nonceStr'  => $nonceStr,
         ];
