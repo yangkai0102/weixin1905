@@ -151,8 +151,8 @@ class WxController extends Controller
 <MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA['. date('Y-m-d H:i:s') . $msg.']]></Content>
 </xml>';
+                echo $response_weather;
             }
-            echo $response_weather;
         }
         $msg_type=$xml_obj->MsgType;
         $touser = $xml_obj->FromUserName;     //接收消息的用户openid
