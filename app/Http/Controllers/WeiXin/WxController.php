@@ -88,7 +88,7 @@ class WxController extends Controller
 
         //处理xml数据
         $xml_obj=simplexml_load_string($xml_str);
-        $event=$xml_obj->Event;
+        $event=$xml_obj->Event;        //获取类型
 //        dd($event);
         $openid=$xml_obj->FromUserName;//获取用户的openid
 
