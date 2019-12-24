@@ -27,16 +27,19 @@ class IndexController extends Controller
         //微信配置
         $nonceStr = Str::random(8);
         $wx_config = [
-            'u'         => $user_info,
+
             'appid'     => env('WX_APPID'),
             'timestamp' => time(),
-            'noncestr'  => $nonceStr,
+            'nonceStr'  => $nonceStr,
         ];
         $ticket = P_wx_users::getJsapiTicket();
         $url = $_SERVER['APP_URL'] . $_SERVER['REQUEST_URI'];;      //  当前url
         $jsapi_signature = P_wx_users::jsapiSign($ticket,$url,$wx_config);
         $wx_config['signature'] = $jsapi_signature;
-
+        $data=[
+            'u'         => $user_info,
+            'wx_config'=>$wx_config
+        ];
         return view('index.index',$wx_config);
     }
 
