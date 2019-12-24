@@ -68,6 +68,7 @@ class WxController extends Controller
         //处理xml数据
         $xml_obj=simplexml_load_string($xml_str);
         $event=$xml_obj->Event;
+        dd($event);
         $openid=$xml_obj->FromUserName;//获取用户的openid
 
         if($event=='subscribe'){
@@ -112,7 +113,6 @@ class WxController extends Controller
             }
         }elseif ($event=='CLICK'){
 
-
             //请求第三方接口 获取天气
             $weather_api='https://free-api.heweather.net/s6/weather/now?location=beijing&key=84b0762b44004553957edc38e40862c9';
             $weather_info=file_get_contents($weather_api);
@@ -141,13 +141,13 @@ class WxController extends Controller
         $media_id=$xml_obj->MediaId;
         $content=date('Y-m-d h:i:s').$xml_obj->Content;
 
-        $data=[
-            'openid'=>$openid,
-            'nickname'=>$user['nickname'],
-            'sex'=>$user['sex'],
-            'content'=>$content
-        ];
-        $res=Message::create($data);
+//        $data=[
+//            'openid'=>$openid,
+//            'nickname'=>$user['nickname'],
+//            'sex'=>$user['sex'],
+//            'content'=>$content
+//        ];
+//        $res=Message::create($data);
         if($msg_type=="text"){
             $response_text='<xml>
                 <ToUserName><![CDATA['.$touser.']]></ToUserName>

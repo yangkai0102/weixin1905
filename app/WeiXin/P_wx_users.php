@@ -47,8 +47,8 @@ class P_wx_users extends Model
     }
 
     public static function jsapiSign($ticket,$url,$param){
-        $string="jsapi_ticket={$ticket}&noncestr={$param['nonceStr']}&timestamp={$param['timestamp']}$url=".$url;
-        return sha1($string);
+        $string1="jsapi_ticket={$ticket}&noncestr={$param['nonceStr']}&timestamp={$param['timestamp']}$url=".$url;
+        return sha1($string1);
     }
 
 }
