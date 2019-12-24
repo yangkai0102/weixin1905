@@ -612,14 +612,14 @@
 <!-- end footer -->
 
 <!-- scripts -->
-<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/materialize.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/fakeLoader.min.js"></script>
 <script src="js/animatedModal.min.js"></script>
 <script src="js/main.js"></script>
-<script>
+<script >
     wx.config({
         debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: "{{$wx_config['appId']}}", // 必填，公众号的唯一标识
@@ -640,6 +640,10 @@
                 alert('分享朋友成功');
             }
         })
+    });
+
+
+
         //分享到盆友圈
         wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
             wx.updateTimelineShareData({
@@ -650,8 +654,8 @@
                     alert("分享成功");
                 }
             })
-        });
-    });
+        })
+    
 </script>
 
 </body>
