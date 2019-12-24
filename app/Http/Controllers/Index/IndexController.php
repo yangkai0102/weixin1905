@@ -22,10 +22,23 @@ class IndexController extends Controller
             $user_info=$this->getUserInfo($data['access_token'],$data['openid']);
             P_wx_users::insertGetId($user_info);
         }
-        $data=[
-            'u'=>$user_info
-        ];
 
+        //微信配置
+        $nonceStr = Str::random(8);
+        $signature = "";
+        $wx_config = [
+            'appId'     => env('WX_APPID'),
+            'timestamp' => time(),
+            'nonceStr'  => $nonceStr,
+        ];
+        $ticket = P_wx_users::getJsapiTicket();
+        $url = $_SERVER['APP_URL'] . $_SERVER['REQUEST_URI'];;      //  当前url
+        $jsapi_signature = P_wx_users::jsapiSign($ticket,$url,$wx_config);
+        $wx_config['signature'] = $jsapi_signature;
+        $data = [
+            'u'         => $user_info,
+            'wx_config' => $wx_config
+        ];
         return view('index.index',$data);
     }
 

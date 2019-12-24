@@ -21,9 +21,10 @@ class WxController extends Controller
         $wind_dir=$weather_info_arr['HeWeather6'][0]['now']['wind_dir'];
         $msg=$cond_txt.' 温度：'.$tmp . '风向：'. $wind_dir;
 
+
         $key='wx_access_token';
         $access_token=Redis::get($key);
-//        echo $access_token;
+//        echo $access_token;curl
         $openid_arr=P_wx_users::select('openid')->get()->toArray();
 //        print_r($openid_arr);die;
         $openid=array_column($openid_arr,'openid');

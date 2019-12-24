@@ -163,6 +163,7 @@ class WxController extends Controller
         }elseif ($msg_type=="image"){     //图片消息
             //下载图片
             $this->getMedia2($media_id,$msg_type);
+
             //回复图片
             $response_image='<xml>
                             <ToUserName><![CDATA['.$touser.']]></ToUserName>
@@ -243,6 +244,7 @@ class WxController extends Controller
         if($media_type=='image'){    //保存图片
             $file_name=date('Ymdhis').mt_rand(11111,99999).$extension;
             $save_path=$save_path.'imgs/'.$file_name;
+
         }elseif ($media_type=='voice'){   //保存语音
             $file_name=date('Ymdhis').mt_rand(11111,99999).$extension;
             $save_path=$save_path.'voice/'.$file_name;
