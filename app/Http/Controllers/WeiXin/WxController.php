@@ -21,6 +21,26 @@ class WxController extends Controller
         echo $this->access_token;
     }
 
+    public function login(){
+        $code=$_GET['code'];
+        $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_APPSECRET').'&code='.$code.'&grant_type=authorization_code';
+        $json_data=file_get_contents($url);
+        $data=json_decode($json_data,true);
+
+        //判断用户是否已存在
+        $openid=$data['openid'];
+
+        $u=P_wx_users::where(['openid'=>$openid])->first();
+        if($u){
+            $user_info=$u->toArray();
+        }else{
+            $user_info=$this->getUserInfo($data['access_token'],$data['openid']);
+            P_wx_users::insertGetId($user_info);
+        }
+        return redirect('/');
+
+    }
+
     public function getAccessToken(){
         $key='wx_access_token';
         $access_token=Redis::get($key);
@@ -264,7 +284,7 @@ class WxController extends Controller
         $redirect_uri=urlencode($url);         //授权后跳转页面
 
         //微信商城
-        $shop_url='http://1905yangkai.comcto.com/';
+        $shop_url='http://1905yangkai.comcto.com/wx/login';
         $redirect_shop=urlencode($shop_url);
 
 //        print_r($redirect_uri);

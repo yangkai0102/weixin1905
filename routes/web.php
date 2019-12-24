@@ -25,6 +25,8 @@ Route::get('/goods/detail','Goods\IndexController@detail');      //商品详情�
 
 //微信开发
 Route::get('/wx','WeiXin\WxController@wx');
+Route::get('/wx/login','WeiXin\WxController@login');
+
 Route::post('/wx','WeiXin\WxController@receiv');
 Route::get('/wx/media','WeiXin\WxController@getMedia');
 Route::get('/wx/menu','WeiXin\WxController@createMenu');
