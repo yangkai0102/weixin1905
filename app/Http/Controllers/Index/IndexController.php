@@ -14,7 +14,6 @@ class IndexController extends Controller
         //微信配置
         $nonceStr = Str::random(8);
         $wx_config = [
-
             'appid'     => env('WX_APPID'),
             'timestamp' => time(),
             'nonceStr'  => $nonceStr,
@@ -24,10 +23,9 @@ class IndexController extends Controller
         $jsapi_signature = P_wx_users::jsapiSign($ticket,$url,$wx_config);
         $wx_config['signature'] = $jsapi_signature;
         $data=[
-
             'wx_config'=>$wx_config
         ];
-        return view('index.index',$wx_config);
+        return view('index.index',$data);
     }
 
     public function getAccessToken($code){
