@@ -38,7 +38,7 @@ class P_wx_users extends Model
         }
         $access_token=self::getAccessToken();
         $url='https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi';
-        $jsapi=file_gey_contents($url);
+        $jsapi=file_get_contents($url);
         $data=json_decode($jsapi,true);
         Redis::set($key,$data['ticket']);
         Redis::expire($key,3600);
