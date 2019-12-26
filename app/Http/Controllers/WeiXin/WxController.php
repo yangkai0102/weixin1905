@@ -412,26 +412,26 @@ class WxController extends Controller
 </xml>';
                 echo $xml;
         }
-        $msgType=$xml->MsgType;
-        if($msgType=='CLICK'){
-            if($xml->EventKey=='cache'){
-                $res=GuanLi::where('openid',$openid)->get();
-                if($res){
-                    $msg='用户名：'.$info['nickname'].'第一节: '.$res['a1'].'第二节: '.$res['a2'].'第三节: '.$res['a3'].'第四节: '.$res['a4'];
-                }else{
-                    $msg='请先选择课程';
-                }
-
-                $xml_ke='<xml>
-  <ToUserName><![CDATA['.$openid.']]></ToUserName>
-  <FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName>
-  <CreateTime>'.time().'</CreateTime>
-  <MsgType><![CDATA[text]]></MsgType>
-  <Content><![CDATA['.$msg.']]></Content>
-</xml>';
-                echo $xml_ke;
-            }
-        }
+//        $msgType=$xml->MsgType;
+//        if($msgType=='CLICK'){
+//            if($xml->EventKey=='cache'){
+//                $res=GuanLi::where('openid',$openid)->get();
+//                if($res){
+//                    $msg='用户名：'.$info['nickname'].'第一节: '.$res['a1'].'第二节: '.$res['a2'].'第三节: '.$res['a3'].'第四节: '.$res['a4'];
+//                }else{
+//                    $msg='请先选择课程';
+//                }
+//
+//                $xml_ke='<xml>
+//  <ToUserName><![CDATA['.$openid.']]></ToUserName>
+//  <FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName>
+//  <CreateTime>'.time().'</CreateTime>
+//  <MsgType><![CDATA[text]]></MsgType>
+//  <Content><![CDATA['.$msg.']]></Content>
+//</xml>';
+//                echo $xml_ke;
+//            }
+//        }
 
     }
 
