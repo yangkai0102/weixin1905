@@ -357,12 +357,17 @@ class WxController extends Controller
     }
 
     public function wxreceiv(){
+        $log='wx.log';
         $xml_str=file_get_contents("php://input");
+        file_put_contents($log,$xml_str,FILE_APPEND);
         $xml=simplexml_load_string($xml_str);
 
         $event=$xml->Event;
         $openid=$xml->FromUserName;
 
+        if($event=='subscribe'){
+
+        }
     }
 
 
