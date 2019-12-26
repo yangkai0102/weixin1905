@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class GuanLi extends Model
 {
-   public $table='gunali';
+   public $table='guanli';
    protected $primaryKey='id';
 }

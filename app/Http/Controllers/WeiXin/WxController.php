@@ -443,7 +443,7 @@ class WxController extends Controller
 
 
 public function guanli(){
-        GuanLi::get();
+
         return view('guanli');
 
 }
