@@ -450,10 +450,7 @@ public function guanli(){
         $data=file_get_contents($url);
         $data_arr=json_decode($data,true);
         $openid=$data_arr['openid'];
-        $res=GuanLi::where('openid',$openid)->get();
-        if($res){
-            return redirect('wx/index');
-        }
+        
         return view('guanli',['openid'=>$openid]);
 
 }
