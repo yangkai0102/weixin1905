@@ -15,25 +15,47 @@
 //    return view('welcome');
 //});
 
-Route::get('/info',function () {
-    phpinfo();
-});
+//Route::get('/info',function () {
+//    phpinfo();
+//});
+//
+//
+//Route::get('/','Index\IndexController@index');            //微商城首页
+//Route::get('/goods/detail','Goods\IndexController@detail');      //商品详情页
+//
+//
+////微信开发
+//Route::get('/wx','WeiXin\WxController@wx');
+//Route::get('/wx/login','WeiXin\WxController@login');
+//
+//Route::post('/wx','WeiXin\WxController@receiv');
+//Route::get('/wx/media','WeiXin\WxController@getMedia');
+//Route::get('/wx/menu','WeiXin\WxController@createMenu');
+//Route::get('/wx/access_token','WeiXin\WxController@access_token');
+//Route::get('/wx/qrcode','WeiXin\WxQRController@qrcode');
+//
+////微信公众号
+//Route::get('/vote','VoteController@index');     //微信投票
+//
+//Route::get('/wx/sendmsg','Crontab\WxController@sendMsg');     //微信群发
 
-Route::get('/','Index\IndexController@index');            //微商城首页
-Route::get('/goods/detail','Goods\IndexController@detail');      //商品详情页
-
-
-//微信开发
 Route::get('/wx','WeiXin\WxController@wx');
-Route::get('/wx/login','WeiXin\WxController@login');
+Route::get('/wx','WeiXin\WxController@wxreceiv');
 
-Route::post('/wx','WeiXin\WxController@receiv');
-Route::get('/wx/media','WeiXin\WxController@getMedia');
-Route::get('/wx/menu','WeiXin\WxController@createMenu');
-Route::get('/wx/access_token','WeiXin\WxController@access_token');
-Route::get('/wx/qrcode','WeiXin\WxQRController@qrcode');
 
-//微信公众号
-Route::get('/vote','VoteController@index');     //微信投票
 
-Route::get('/wx/sendmsg','Crontab\WxController@sendMsg');     //微信群发
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
