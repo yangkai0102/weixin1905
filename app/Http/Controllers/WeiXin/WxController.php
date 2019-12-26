@@ -412,8 +412,8 @@ class WxController extends Controller
 </xml>';
                 echo $xml;
         }
-
-        if($event=='CLICK'){
+        $msgType=$xml->MsgType;
+        if($msgType=='CLICK'){
             if($xml->EventKey=='cache'){
                 $res=GuanLi::where('openid',$openid)->get();
                 if($res){
