@@ -40,7 +40,7 @@
 //Route::get('/wx/sendmsg','Crontab\WxController@sendMsg');     //微信群发
 
 Route::get('/wx','WeiXin\WxController@wx');
-Route::get('/wx','WeiXin\WxController@wxreceiv');
+Route::post('/wx','WeiXin\WxController@wxreceiv');
 
 
 
