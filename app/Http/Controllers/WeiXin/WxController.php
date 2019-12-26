@@ -443,6 +443,7 @@ class WxController extends Controller
 
 
 public function guanli(){
+        dd($_GET);
         $code=$_GET['code'];
         return view('guanli',['code'=>$code]);
 
@@ -450,7 +451,7 @@ public function guanli(){
 
 public function guanlido(){
         $post=request()->except('_token');
-        dd($post);
+//        dd($post);
         $res=GuanLi::insertGetId($post);
         if($res){
             return redirect('wx/index');
