@@ -42,6 +42,8 @@
 Route::get('/wx','WeiXin\WxController@wx');
 Route::post('/wx','WeiXin\WxController@wxreceiv');
 Route::get('/wx/menu','WeiXin\WxController@menu');
+Route::get('/wx/guanli','WeiXin\WxController@guanli');
+
 
 
 

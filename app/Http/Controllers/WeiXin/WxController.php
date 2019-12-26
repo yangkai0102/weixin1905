@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\WeiXin;
 
 use App\Http\Controllers\Controller;
+use App\WeiXin\GuanLi;
 use App\WeiXin\Message;
 use App\WeiXin\P_wx_users;
 use Illuminate\Http\Request;
@@ -400,7 +401,7 @@ class WxController extends Controller
 
             P_wx_users::insertGetId($data);
 
-            $msg=$data['nickname'].'谢谢关注';
+            $msg='欢迎'.$data['nickname'].'进入选课系统';
 
                 $xml='<xml>
   <ToUserName><![CDATA['.$openid.']]></ToUserName>
@@ -415,6 +416,8 @@ class WxController extends Controller
     }
 
     public function menu(){
+        $guanli_url='1905yangkai.comcto.com/wx/guanli';
+        $redirect_url=urlencode($guanli_url);
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->access_token;
         $menu=[
                 'button'=>[
@@ -426,7 +429,7 @@ class WxController extends Controller
                     [
                         'type'=>'click',
                         'name'=>'管理课程',
-                        'key'=>'guanli'
+                        'url'=>'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_userinfo&state=1905kecheng#wechat_redirect'
                     ],
                 ]
         ];
@@ -439,8 +442,18 @@ class WxController extends Controller
     }
 
 
+public function guanli(){
+        GuanLi::get();
+        return view('guanli');
 
+}
 
-
+public function guanlido(){
+        $post=request()->except('_token');
+        $res=GuanLi::insetGetId();
+        if($res){
+            echo "添加成功";
+        }
+}
 
 }
