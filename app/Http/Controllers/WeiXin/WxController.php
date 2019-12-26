@@ -450,7 +450,7 @@ public function guanli(){
         $data=file_get_contents($url);
         $data_arr=json_decode($data,true);
         $openid=$data_arr['openid'];
-        
+
         return view('guanli',['openid'=>$openid]);
 
 }
