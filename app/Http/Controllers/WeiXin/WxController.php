@@ -416,7 +416,7 @@ class WxController extends Controller
     }
 
     public function menu(){
-        $guanli_url='1905yangkai.comcto.com/wx/guanli';
+        $guanli_url='http://1905yangkai.comcto.com/wx/guanli';
         $redirect_url=urlencode($guanli_url);
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->access_token;
         $menu=[
@@ -427,7 +427,7 @@ class WxController extends Controller
                         'key'=>'chake'
                     ],
                     [
-                        'type'=>'click',
+                        'type'=>'view',
                         'name'=>'管理课程',
                         'url'=>'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_userinfo&state=1905kecheng#wechat_redirect'
                     ],
@@ -454,6 +454,11 @@ public function guanlido(){
         if($res){
             echo "添加成功";
         }
+}
+
+public function access_token(){
+        $key='wx_access_token';
+        Redis::del($key);
 }
 
 }
