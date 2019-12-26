@@ -450,7 +450,7 @@ public function guanli(){
 
 public function guanlido(){
         $post=request()->except('_token');
-        $res=GuanLi::insetGetId();
+        $res=GuanLi::insertGetId();
         if($res){
             echo "添加成功";
         }
