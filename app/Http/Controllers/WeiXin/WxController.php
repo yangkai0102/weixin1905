@@ -411,8 +411,9 @@ class WxController extends Controller
   <Content><![CDATA['.$msg.']]></Content>
 </xml>';
                 echo $xml;
-
         }
+
+
     }
 
     public function menu(){
