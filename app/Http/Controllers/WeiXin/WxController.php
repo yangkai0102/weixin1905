@@ -332,9 +332,28 @@ class WxController extends Controller
 //        echo $this->getAccessToken();
 //    }
 
+    protected $access_token;
 
+    public function __construct()
+    {
+        $this->access_token=$this->getAccessToken();
 
+    }
 
+    public function getAccessToken(){
+        $key='wx_access_token';
+
+        $access_token=Redis::get($key);
+        if($access_token){
+            return $access_token;
+        }
+        $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WX_APPID').'&secret='.env('WX_APPSECRET');
+        $data=file_get_contents($url);
+        $data=json_decode($data,true);
+        Redis::set($key,$data['access_token']);
+        Redis::expire($key,3600);
+        return $data['access_token'];
+    }
 
     public function wx()
     {
@@ -366,8 +385,57 @@ class WxController extends Controller
         $openid=$xml->FromUserName;
 
         if($event=='subscribe'){
+            $url='https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->access_token.'&openid='.$openid.'&lang=zh_CN';
+//            echo $url;die;
+            $data_arr=file_get_contents($url);
+            $info=json_decode($data_arr,true);
+//            print_r($info);die;
+            $data=[
+                'openid'=>$openid,
+                'nickname'=>$info['nickname'],
+                'sex'=>$info['sex'],
+                'headimgurl'=>$info['headimgurl'],
+                'subscribe_time'=>time()
+            ];
+
+            P_wx_users::insertGetId($data);
+
+            $msg=$data['nickname'].'谢谢关注';
+
+                $xml='<xml>
+  <ToUserName><![CDATA['.$openid.']]></ToUserName>
+  <FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName>
+  <CreateTime>'.time().'</CreateTime>
+  <MsgType><![CDATA[text]]></MsgType>
+  <Content><![CDATA['.$msg.']]></Content>
+</xml>';
+                echo $xml;
 
         }
+    }
+
+    public function menu(){
+        $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->access_token;
+        $menu=[
+                'button'=>[
+                    [
+                        'type'=>'click',
+                        'name'=>'查课课程',
+                        'key'=>'chake'
+                    ],
+                    [
+                        'type'=>'click',
+                        'name'=>'管理课程',
+                        'key'=>'guanli'
+                    ],
+                ]
+        ];
+        $menu=json_encode($menu,JSON_UNESCAPED_UNICODE);
+        $client=new Client();
+        $response=$client->request('POST',$url,[
+            'body'=>$menu
+        ]);
+        echo $response->getBody();
     }
 
 
