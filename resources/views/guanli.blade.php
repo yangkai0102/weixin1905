@@ -14,7 +14,7 @@
     第二节课: <input type="text" name="a2"><br>
     第三节课: <input type="text" name="a3"><br>
     第四节课: <input type="text" name="a4"><br>
-    <input type="hidden" name="code" value="{{$code}}">
+    <input type="hidden" name="code" value="{{$openid}}">
     <input type="submit" value="提交">
 </form>
 </body>

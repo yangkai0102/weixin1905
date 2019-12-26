@@ -443,9 +443,17 @@ class WxController extends Controller
 
 
 public function guanli(){
-        dd($_GET);
+
         $code=$_GET['code'];
-        return view('guanli',['code'=>$code]);
+        $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_APPSECRET').'&code='.$code.'&grant_type=authorization_code';
+        $data=file_get_contents($url);
+        $data_arr=json_decode($data,true);
+        $openid=$data_arr['openid'];
+        $res=GuanLi::where('openid',$openid)->get();
+        if($res){
+            return redirect('wx/index');
+        }
+        return view('guanli',['openid'=>$openid]);
 
 }
 
@@ -457,9 +465,7 @@ public function guanlido(){
             return redirect('wx/index');
         }
 }
-function index(){
 
-}
 
 public function access_token(){
         $key='wx_access_token';
