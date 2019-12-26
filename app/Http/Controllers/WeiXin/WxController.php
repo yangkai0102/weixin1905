@@ -422,13 +422,14 @@ class WxController extends Controller
                     $msg='请先选择课程';
                 }
 
-                $xml='<xml>
+                $xml_ke='<xml>
   <ToUserName><![CDATA['.$openid.']]></ToUserName>
   <FromUserName><![CDATA['.$xml->ToUserName.']]></FromUserName>
   <CreateTime>'.time().'</CreateTime>
   <MsgType><![CDATA[text]]></MsgType>
   <Content><![CDATA['.$msg.']]></Content>
 </xml>';
+                echo $xml_ke;
             }
         }
 
